@@ -1,0 +1,88 @@
+version: '2'
+services:
+  es-master:
+    image: ugc-elasticsearch:2.4.1
+    build:
+      context: ./elasticsearch
+    volumes:
+      - ./elasticsearch/config/:/usr/share/elasticsearch/config
+      - ./elasticsearch/logs/master:/usr/share/elasticsearch/logs
+      - ./elasticsearch/data/master:/usr/share/elasticsearch/data
+    hostname: es-master
+    networks:
+      es-network:
+        aliases:
+          - es-master.sandbox
+    restart: always
+    container_name: es-master
+    command: /usr/share/elasticsearch/bin/elasticsearch --node.master=true --cluster.name=ugc-es-cluster --node.name=master-01
+  apache-proxy:
+    image: apache-proxy:1.0
+    build:
+      context: ./apache-proxy
+    networks:
+       - es-network
+    ports:
+      - "17560:5000"
+    restart: always
+    container_name: apache-proxy
+  kibana: 
+    image: kibana:4.6
+    ports:
+      - "17561:5601"
+    networks:
+      - es-network
+    volumes:
+      - ./kibana/config/:/opt/kibana/config/
+    environment:
+      - ELASTICSEARCH_URL=http://es-master:9200
+    container_name: kibana
+  es-node1:
+    image: ugc-elasticsearch:2.4.1
+    build:
+      context: ./elasticsearch
+    volumes:
+      - ./elasticsearch/config/:/usr/share/elasticsearch/config
+      - ./elasticsearch/logs/node-1:/usr/share/elasticsearch/logs
+      - ./elasticsearch/data/node-1:/usr/share/elasticsearch/data
+    networks:
+      - es-network
+    restart: always
+    command: /usr/share/elasticsearch/bin/elasticsearch --node.master=false --cluster.name=ugc-es-cluster --discovery.zen.ping.unicast.hosts=es-master
+    container_name: es-node_1
+    depends_on:
+      - es-master
+  es-node2:
+    image: ugc-elasticsearch:2.4.1
+    build:
+      context: ./elasticsearch
+    volumes:
+      - ./elasticsearch/config/:/usr/share/elasticsearch/config
+      - ./elasticsearch/logs/node-2:/usr/share/elasticsearch/logs
+      - ./elasticsearch/data/node-2:/usr/share/elasticsearch/data
+    networks:
+      - es-network
+    restart: always
+    command: /usr/share/elasticsearch/bin/elasticsearch --node.master=false --cluster.name=ugc-es-cluster --discovery.zen.ping.unicast.hosts=es-master
+    container_name: es-node_2
+    depends_on:
+      - es-master
+  es-node3:
+    image: ugc-elasticsearch:2.4.1
+    build:
+      context: ./elasticsearch
+    volumes:
+      - ./elasticsearch/config/:/usr/share/elasticsearch/config
+      - ./elasticsearch/logs/node-3:/usr/share/elasticsearch/logs
+      - ./elasticsearch/data/node-3:/usr/share/elasticsearch/data
+    networks:
+      - es-network
+    restart: always
+    command: /usr/share/elasticsearch/bin/elasticsearch --node.master=false --cluster.name=ugc-es-cluster --discovery.zen.ping.unicast.hosts=es-master
+    container_name: es-node_3
+    depends_on:
+      - es-master
+
+networks:
+  es-network:
+    driver: bridge
