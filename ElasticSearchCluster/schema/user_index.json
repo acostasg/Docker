@@ -1,0 +1,28 @@
+{
+  "user_index": {
+    "mappings": {
+      "message": {
+        "properties": {
+          "ID": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "userLogin": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "status": {
+            "type": "short"
+          },
+          "crateAt": {
+            "type": "date"
+          }
+        }
+      }
+    }
+  }
+}
