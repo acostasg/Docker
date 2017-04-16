@@ -1,6 +1,7 @@
 # Elastic Search Cluster
 
-Config guide to explain how configure the ES cluster.
+Config g
+uide to explain how configure the ES cluster.
 In this guide I will use Docker Compose as orchestator, in order to be able to create and control the whole services. In the next version, I will try to migrate to Docker v1.12 to avoid the use of Docker Compose and use the default Docker core with some scalability utilities.
 
 With this repo, you can configure a Elastic Search cluster with Kibana an Apache as proxy (this is to hide the real ES API to world, and controll the access to the differents EndPoints).
@@ -12,6 +13,17 @@ With this repo, you can configure a Elastic Search cluster with Kibana an Apache
 ### Install
 
 First of all, you need to install Docker & Docker Compose (I suppose you know how :)
+
+[Install Docker](https://docs.docker.com/engine/installation/)
+
+[Install Docker Composer](https://docs.docker.com/compose/install/)
+
+Remember add your user to admin group docker:
+
+```sh
+sudo usermod -aG docker $USER
+```
+
 Now, once you have it, you can set up all the environment. 
 
 ```sh
