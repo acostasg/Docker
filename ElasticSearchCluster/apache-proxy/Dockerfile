@@ -24,8 +24,8 @@ ADD proxy-conf.conf /etc/apache2/sites-available/
 RUN a2ensite proxy-conf.conf
 
 #Copy SSL cert
-ADD certs/adsmurai.crt /etc/apache2/ssl/POPmessage.crt
-ADD certs/adsmurai.key /etc/apache2/ssl/POPmessage.key
+ADD certs/POPmessage.crt /etc/apache2/ssl/POPmessage.crt
+ADD certs/POPmessage.key /etc/apache2/ssl/POPmessage.key
 ADD certs/bundle.crt /etc/apache2/ssl/bundle.crt
 ADD certs/aws-client-cert.pem /etc/apache2/ssl/aws-client-cert.pem
 
