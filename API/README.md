@@ -19,5 +19,11 @@ cd /API
 Now, once you have it, you can set up all the environment. 
 
 ```sh
-docker build . 
+docker build -t popmessageapi:latest . 
+```
+
+Run image and tomcat:
+
+```sh
+docker run popmessageapi
 ```
