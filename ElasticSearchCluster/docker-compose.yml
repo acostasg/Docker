@@ -15,7 +15,7 @@ services:
           - es-master.sandbox
     restart: always
     container_name: es-master
-    command: /usr/share/elasticsearch/bin/elasticsearch --node.master=true --cluster.name=popmessage-es-cluster --node.name=master-01
+    command: /usr/share/elasticsearch/bin/elasticsearch -Enode.master=true -Ecluster.name=popmessage-es-cluster -Enode.name=master-01
   apache-proxy:
     image: apache-proxy:1.0
     build:
@@ -27,7 +27,9 @@ services:
     restart: always
     container_name: apache-proxy
   kibana: 
-    image: kibana:4.6
+    image: kibana:5.0.1
+    build:
+      context: ./kibana
     ports:
       - "17561:5601"
     networks:
@@ -48,7 +50,7 @@ services:
     networks:
       - es-network
     restart: always
-    command: /usr/share/elasticsearch/bin/elasticsearch --node.master=false --cluster.name=popmessage-es-cluster --discovery.zen.ping.unicast.hosts=es-master
+    command: /usr/share/elasticsearch/bin/elasticsearch -Enode.master=false -Ecluster.name=popmessage-es-cluster -Ediscovery.zen.ping.unicast.hosts=es-master
     container_name: es-node_1
     depends_on:
       - es-master
@@ -63,7 +65,7 @@ services:
     networks:
       - es-network
     restart: always
-    command: /usr/share/elasticsearch/bin/elasticsearch --node.master=false --cluster.name=popmessage-es-cluster --discovery.zen.ping.unicast.hosts=es-master
+    command: /usr/share/elasticsearch/bin/elasticsearch -Enode.master=false -Ecluster.name=popmessage-es-cluster -Ediscovery.zen.ping.unicast.hosts=es-master
     container_name: es-node_2
     depends_on:
       - es-master
@@ -78,7 +80,7 @@ services:
     networks:
       - es-network
     restart: always
-    command: /usr/share/elasticsearch/bin/elasticsearch --node.master=false --cluster.name=popmessage-es-cluster --discovery.zen.ping.unicast.hosts=es-master
+    command: /usr/share/elasticsearch/bin/elasticsearch -Enode.master=false -Ecluster.name=popmessage-es-cluster -Ediscovery.zen.ping.unicast.hosts=es-master
     container_name: es-node_3
     depends_on:
       - es-master

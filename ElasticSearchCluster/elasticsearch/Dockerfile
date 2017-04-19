@@ -18,30 +18,37 @@ RUN chmod +rx /etc/resolv.conf
 ENV HOME /home/$userdeb/
 
 # Install dependencies
-RUN 	apt-get update && \
+RUN apt-get update && \
 	apt-get install -y \
 	  openjdk-8-jre \
 	  apt-transport-https \
 	  wget \
 	  vim
 
-ENV ES_SKIP_SET_KERNEL_PARAMETERS=true
 RUN	cd && \
-	wget https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/2.4.4/elasticsearch-2.4.4.deb && \
-	dpkg -i elasticsearch-2.4.4.deb
+	wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.0.1.deb && \
+	dpkg -i elasticsearch-5.0.1.deb
 
 # Configure ElasticSearch
 RUN mkdir -p /usr/share/elasticsearch/data \
-	     /usr/share/elasticsearch/logs \
-	     /usr/share/elasticsearch/config \
-	     /usr/share/elasticsearch/config/scripts
-RUN chown -R $userdeb:$groupdeb \
-             /usr/share/elasticsearch/data \
-             /usr/share/elasticsearch/logs \
-             /usr/share/elasticsearch/config \
-	     /usr/share/elasticsearch/config/scripts
+		/usr/share/elasticsearch/logs \
+		/usr/share/elasticsearch/config \
+		/usr/share/elasticsearch/config/scripts && \
+	chown -R $userdeb:$groupdeb /usr/share/elasticsearch/data \
+                /usr/share/elasticsearch/logs \
+                /usr/share/elasticsearch/config \
+		/usr/share/elasticsearch/config/scripts
 
+# Configure ElasticSearch
+RUN echo "vm.max_map_count=262144" >> /etc/sysctl.conf
+
+#ADD logging.yml /usr/share/elasticsearch/config/logging.yml
+ADD /config/log4j2.properties /usr/share/elasticsearch/config/log4j2.properties
+ADD /config/elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.yml
 RUN chown -R $userdeb:$groupdeb /usr/share/elasticsearch/config/
+
+# Install elasticsearch-x-pack plugin
+#RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install x-pack
 
 USER $userdeb
 EXPOSE 9200-9300
