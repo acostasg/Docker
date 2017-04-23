@@ -25,5 +25,6 @@ docker build -t popmessageapi:latest .
 Run image and tomcat:
 
 ```sh
-docker run popmessageapi
+docker run -d -p 127.0.0.1:8080:8080 --name POPmessage popmessageapi
+
 ```

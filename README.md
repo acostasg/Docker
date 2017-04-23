@@ -18,3 +18,15 @@ Docker automates the repetitive tasks of setting up and configuring development 
 
 - [API gateway](https://github.com/acostasg/Docker/tree/master/API)
 - [ElasticSearch Cluster](https://github.com/acostasg/Docker/blob/master/ElasticSearchCluster/README.md)
+
+Start environment:
+
+```sh
+./setUp.sh 
+```
+
+stop environment:
+
+```sh
+./setDown.sh 
+```

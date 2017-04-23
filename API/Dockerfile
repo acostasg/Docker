@@ -30,18 +30,12 @@ RUN \
   rm -rf /var/cache/oracle-jdk8-installer
 
 
-# Define working directory.
-WORKDIR /data
-
-# Define commonly used JAVA_HOME variable
-ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
-
 # Deploy in root folder
 RUN rm -rf $HOME/POPmessage
 RUN mkdir $HOME/POPmessage
-ADD POPmessage.war $HOME/POPmessage/POPmessage.war
+ADD jar $HOME/POPmessage
 
 
-EXPOSE 1898
-CMD java -jar "$HOME/POPmessage/POPmessage.war"
+EXPOSE 127.0.0.1:8080:8080
+CMD ["/usr/bin/java", "-jar", "/home/popmessage/POPmessage/POPmessage.jar"]
 
