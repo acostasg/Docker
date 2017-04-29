@@ -3,20 +3,11 @@
     "mappings": {
       "message": {
         "properties": {
-          "ID": {
+          "token": {
             "type": "string"
           },
-          "name": {
-            "type": "string"
-          },
-          "userLogin": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          },
-          "status": {
-            "type": "short"
+          "crateAt": {
+            "type": "date"
           }
         }
       }

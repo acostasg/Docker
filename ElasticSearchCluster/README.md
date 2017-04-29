@@ -64,3 +64,9 @@ The Apache R-Proxy is responsible to hide the ES API to the real world, so only 
 Today (01/02/2017), there are only two Secrets and Access Keys that provides access to the API. So, if you need a new one you should ask @owust.
 
 To configure this API Gateway you need to create some end-points which maps to the internals ES, this is manual and must be done through AWS Console (UI). To login into this UI you need the POPmessage credentials. Once you have it, and are inside the service, you can add some new methods/resources or change the permissions on each method. When this is done, you need to deploy the API in a stage. Today (04/07/2017) the main stage to deploy the API is ```ES-PROD``` and all authentication methods must be active (IAM Role & API Key)
+
+Script to create schema to index and mapping
+
+```sh
+./createIndexAndMappings.sh
+```

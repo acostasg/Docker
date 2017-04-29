@@ -25,8 +25,14 @@ Start environment:
 ./setUp.sh 
 ```
 
-stop environment:
+Stop environment:
 
 ```sh
 ./setDown.sh 
+```
+
+Restart only API before to compile jar:
+
+```sh
+./restartAPI.sh 
 ```

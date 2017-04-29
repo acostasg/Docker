@@ -16,18 +16,18 @@ RUN a2enmod proxy \
 	rewrite \
 	deflate \
 	headers \
-	proxy_connect \
-        ssl
+	proxy_connect #\
+	# ssl
 
 #Copy config
 ADD proxy-conf.conf /etc/apache2/sites-available/
 RUN a2ensite proxy-conf.conf
 
-#Copy SSL cert
-ADD certs/POPmessage.crt /etc/apache2/ssl/POPmessage.crt
-ADD certs/POPmessage.key /etc/apache2/ssl/POPmessage.key
-ADD certs/bundle.crt /etc/apache2/ssl/bundle.crt
-ADD certs/aws-client-cert.pem /etc/apache2/ssl/aws-client-cert.pem
+#Copy SSL cert - disabled en env envoriment active in production
+#ADD certs/POPmessage.crt /etc/apache2/ssl/POPmessage.crt
+#ADD certs/POPmessage.key /etc/apache2/ssl/POPmessage.key
+#ADD certs/bundle.crt /etc/apache2/ssl/bundle.crt
+#ADD certs/aws-client-cert.pem /etc/apache2/ssl/aws-client-cert.pem
 
 EXPOSE 5000
 CMD ["apachectl", "-D", "FOREGROUND"]
