@@ -4,6 +4,9 @@
           "token": {
             "type": "string"
           },
+          "userId": {
+            "type": "string"
+          },
           "crateAt": {
             "type": "date"
           }
