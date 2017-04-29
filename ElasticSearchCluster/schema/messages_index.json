@@ -1,6 +1,4 @@
-{
-  "message_index": {
-    "mappings": {
+ {
       "message": {
         "properties": {
           "ID": {
@@ -50,5 +48,3 @@
         }
       }
     }
-  }
-}

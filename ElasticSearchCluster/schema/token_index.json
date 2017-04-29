@@ -1,6 +1,4 @@
-{
-  "token_index": {
-    "mappings": {
+ {
       "message": {
         "properties": {
           "token": {
@@ -12,5 +10,3 @@
         }
       }
     }
-  }
-}
