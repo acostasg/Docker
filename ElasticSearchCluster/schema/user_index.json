@@ -1,24 +1,31 @@
- {
-      "message": {
-        "properties": {
-          "ID": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "userLogin": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          },
-          "status": {
-            "type": "short"
-          },
-          "crateAt": {
-            "type": "date"
-          }
+{
+  "settings": {
+    "number_of_shards": 5,
+    "number_of_replicas": 2
+  },
+  "mappings": {
+    "user": {
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "userLogin": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "crateAt": {
+          "type": "date",
+          "format": "yyyy-MM-dd HH:mm:ss||dd/mm/yyyy||epoch_millis"
         }
       }
     }
+  }
+}

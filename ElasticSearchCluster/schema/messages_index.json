@@ -1,50 +1,37 @@
- {
-      "message": {
-        "properties": {
-          "ID": {
-            "type": "string"
-          },
-          "user": {
-            "type": "nested",
-            "properties": {
-              "ID": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              }
+{
+  "settings": {
+    "number_of_shards": 5,
+    "number_of_replicas": 2
+  },
+  "mappings": {
+    "message": {
+      "properties": {
+        "ID": {
+          "type": "string"
+        },
+        "user": {
+          "type": "nested",
+          "properties": {
+            "ID": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
             }
-          },
-          "text": {
-            "type": "string"
-          },
-          "location": [
-            {
-              "lat": "string",
-              "lon": "string"
-            }
-          ],
-          "voteCollection": [
-            {
-              "vote": {
-                "type": "nested",
-                "properties": {
-                  "userID": {
-                    "type": "string"
-                  },
-                  "nameUser": {
-                    "type": "string"
-                  },
-                  "type": {
-                    "type": "short"
-                  }
-                }
-              }
-            }
-          ],
-          "status": {
-            "type": "short"
           }
+        },
+        "text": {
+          "type": "string"
+        },
+        "location":
+          {
+            "type": "geo_point"
+          }
+        ,
+        "status": {
+          "type": "string"
         }
       }
     }
+  }
+}

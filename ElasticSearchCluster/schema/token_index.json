@@ -1,15 +1,22 @@
- {
-      "message": {
-        "properties": {
-          "token": {
-            "type": "string"
-          },
-          "userId": {
-            "type": "string"
-          },
-          "crateAt": {
-            "type": "date"
-          }
+{
+  "settings": {
+    "number_of_shards": 5,
+    "number_of_replicas": 2
+  },
+  "mappings": {
+    "token": {
+      "properties": {
+        "hash": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "crateAt": {
+          "type": "date",
+          "format": "yyyy-MM-dd HH:mm:ss||dd/mm/yyyy||epoch_millis"
         }
       }
     }
+  }
+}

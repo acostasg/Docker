@@ -16,8 +16,7 @@ RUN a2enmod proxy \
 	rewrite \
 	deflate \
 	headers \
-	proxy_connect #\
-	# ssl
+	proxy_connect
 
 #Copy config
 ADD proxy-conf.conf /etc/apache2/sites-available/

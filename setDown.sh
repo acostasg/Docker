@@ -14,4 +14,4 @@ fuser -k 8080/tcp
 fuser -k 17560/tcp
 fuser -k 17561/tcp
 
-echo "$(tput setaf 2) Finish setUp succes!!!$(tput sgr 0)"
+echo "$(tput setaf 2) Finish setDown succes!!!$(tput sgr 0)"
