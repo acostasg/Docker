@@ -33,7 +33,7 @@ RUN \
 # Deploy in root folder
 RUN rm -rf $HOME/POPmessage
 RUN mkdir $HOME/POPmessage
-ADD jar $HOME/POPmessage
+COPY /jar $HOME/POPmessage/
 
 
 EXPOSE 127.0.0.1:8080:8080
