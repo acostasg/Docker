@@ -29,6 +29,13 @@
         "votes": [],
         "status": {
           "type": "string"
+        },
+        "sort": {
+          "type": "integer"
+        },
+        "createAd": {
+          "type": "date",
+          "format": "yyyy-MM-dd HH:mm:ss||dd/mm/yyyy||epoch_millis"
         }
       }
     }
