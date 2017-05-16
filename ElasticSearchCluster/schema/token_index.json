@@ -7,10 +7,12 @@
     "token": {
       "properties": {
         "hash": {
-          "type": "string"
+          "type": "string",
+          "index": "not_analyzed"
         },
         "userId": {
-          "type": "string"
+          "type": "string",
+          "index": "not_analyzed"
         },
         "crateAt": {
           "type": "date",
