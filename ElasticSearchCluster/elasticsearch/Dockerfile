@@ -46,6 +46,7 @@ RUN echo "vm.max_map_count=262144" >> /etc/sysctl.conf
 ADD /config/log4j2.properties /usr/share/elasticsearch/config/log4j2.properties
 ADD /config/elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.yml
 RUN chown -R $userdeb:$groupdeb /usr/share/elasticsearch/config/
+RUN chown -R $userdeb:$groupdeb /usr/share/elasticsearch/config/script
 
 # Install elasticsearch-x-pack plugin
 #RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install x-pack
