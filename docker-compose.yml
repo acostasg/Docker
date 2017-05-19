@@ -3,11 +3,11 @@ services:
   es-master:
     image: popmessage-elasticsearch:2.4.1
     build:
-      context: ./elasticsearch
+      context: ./ElasticSearchCluster/elasticsearch
     volumes:
-      - ./elasticsearch/config/:/usr/share/elasticsearch/config
-      - ./elasticsearch/logs/master:/usr/share/elasticsearch/logs
-      - ./elasticsearch/data/master:/usr/share/elasticsearch/data
+      - ./ElasticSearchCluster/elasticsearch/config/:/usr/share/elasticsearch/config
+      - ./ElasticSearchCluster/elasticsearch/logs/master:/usr/share/elasticsearch/logs
+      - ./ElasticSearchCluster/elasticsearch/data/master:/usr/share/elasticsearch/data
     hostname: es-master
     networks:
       es-network:
@@ -19,34 +19,49 @@ services:
   apache-proxy:
     image: apache-proxy:1.0
     build:
-      context: ./apache-proxy
+      context: ./ElasticSearchCluster/apache-proxy
+    hostname: apache-proxy
     networks:
-       - es-network
-    ports:
-      - "17560:5000"
+      es-network:
+        aliases:
+          - apache-proxy
     restart: always
     container_name: apache-proxy
+  popmessage-api:
+    image: popmessageapi
+    build:
+      context: ./API
+    networks:
+      es-network:
+        aliases:
+          - POPmessage
+    ports:
+      - "8080:8080"
+    restart: always
+    container_name: popmessageapi
+    depends_on:
+      - apache-proxy
   kibana: 
     image: kibana:5.0.1
     build:
-      context: ./kibana
+      context: ./ElasticSearchCluster/kibana
     ports:
       - "17561:5601"
     networks:
       - es-network
     volumes:
-      - ./kibana/config/:/opt/kibana/config/
+      - ./ElasticSearchCluster/kibana/config/:/opt/kibana/config/
     environment:
       - ELASTICSEARCH_URL=http://es-master:9200
     container_name: kibana
   es-node1:
     image: popmessage-elasticsearch:2.4.1
     build:
-      context: ./elasticsearch
+      context: ./ElasticSearchCluster/elasticsearch
     volumes:
-      - ./elasticsearch/config/:/usr/share/elasticsearch/config
-      - ./elasticsearch/logs/node-1:/usr/share/elasticsearch/logs
-      - ./elasticsearch/data/node-1:/usr/share/elasticsearch/data
+      - ./ElasticSearchCluster/elasticsearch/config/:/usr/share/elasticsearch/config
+      - ./ElasticSearchCluster/elasticsearch/logs/node-1:/usr/share/elasticsearch/logs
+      - ./ElasticSearchCluster/elasticsearch/data/node-1:/usr/share/elasticsearch/data
     networks:
       - es-network
     restart: always
@@ -57,11 +72,11 @@ services:
   es-node2:
     image: popmessage-elasticsearch:2.4.1
     build:
-      context: ./elasticsearch
+      context: ./ElasticSearchCluster/elasticsearch
     volumes:
-      - ./elasticsearch/config/:/usr/share/elasticsearch/config
-      - ./elasticsearch/logs/node-2:/usr/share/elasticsearch/logs
-      - ./elasticsearch/data/node-2:/usr/share/elasticsearch/data
+      - ./ElasticSearchCluster/elasticsearch/config/:/usr/share/elasticsearch/config
+      - ./ElasticSearchCluster/elasticsearch/logs/node-2:/usr/share/elasticsearch/logs
+      - ./ElasticSearchCluster/elasticsearch/data/node-2:/usr/share/elasticsearch/data
     networks:
       - es-network
     restart: always
@@ -72,11 +87,11 @@ services:
   es-node3:
     image: popmessage-elasticsearch:2.4.1
     build:
-      context: ./elasticsearch
+      context: ./ElasticSearchCluster/elasticsearch
     volumes:
-      - ./elasticsearch/config/:/usr/share/elasticsearch/config
-      - ./elasticsearch/logs/node-3:/usr/share/elasticsearch/logs
-      - ./elasticsearch/data/node-3:/usr/share/elasticsearch/data
+      - ./ElasticSearchCluster/elasticsearch/config/:/usr/share/elasticsearch/config
+      - ./ElasticSearchCluster/elasticsearch/logs/node-3:/usr/share/elasticsearch/logs
+      - ./ElasticSearchCluster/elasticsearch/data/node-3:/usr/share/elasticsearch/data
     networks:
       - es-network
     restart: always
