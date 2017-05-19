@@ -21,6 +21,8 @@ services:
     build:
       context: ./ElasticSearchCluster/apache-proxy
     hostname: apache-proxy
+    ports:
+      - "17560:5000"
     networks:
       es-network:
         aliases:
