@@ -45,6 +45,7 @@ RUN echo "vm.max_map_count=262144" >> /etc/sysctl.conf
 #ADD logging.yml /usr/share/elasticsearch/config/logging.yml
 ADD /config/log4j2.properties /usr/share/elasticsearch/config/log4j2.properties
 ADD /config/elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.yml
+RUN mkdir /usr/share/elasticsearch/config/script/
 RUN chown -R $userdeb:$groupdeb /usr/share/elasticsearch/config/
 RUN chown -R $userdeb:$groupdeb /usr/share/elasticsearch/config/script
 
