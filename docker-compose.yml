@@ -20,8 +20,6 @@ services:
     image: apache-proxy:1.0
     build:
       context: ./ElasticSearchCluster/apache-proxy
-    ports:
-      - "17560:5000"
     hostname: apache-proxy
     networks:
       es-network:
