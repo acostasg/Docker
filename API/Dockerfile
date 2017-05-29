@@ -16,6 +16,7 @@ RUN ln -sf /usr/share/zoneinfo/Europe/Madrid /etc/localtime
 RUN groupadd --gid $groupid $groupdeb; useradd -m -b /home --uid $userid --gid $groupid --shell /bin/bash $userdeb
 RUN chmod +rx /etc/resolv.conf
 ENV HOME /home/$userdeb/
+ENV CONFIG /config
 
 # Install Java.
 RUN \
@@ -34,6 +35,9 @@ RUN \
 RUN rm -rf $HOME/POPmessage
 RUN mkdir $HOME/POPmessage
 COPY /jar $HOME/POPmessage/
+RUN rm -rf $CONFIG
+RUN mkdir $CONFIG
+COPY /config $CONFIG
 
 
 EXPOSE 127.0.0.1:8080:8080
