@@ -30,3 +30,8 @@ Stop environment:
 ```sh
 ./setDown.sh 
 ```
+
+* Api Gateway POPmessage is in:
+https://github.com/acostasg/API-Gateway-POPmessage
+* Android application is in:
+https://github.com/acostasg/POPmessage
